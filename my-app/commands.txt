@@ -1,0 +1,19 @@
+docker build -t my-app:1.0 .
+docker run my-app:1.0
+docker run -d -p 5000:5000 my-app:1.0 // port mapping
+
+docker run -d -p 5000:5000 -v $(pwd):/app my-app:1.0 // bind mount
+
+docker network create my-app-network // custom network
+
+docker run -d --name counter --network my-app-network counter-service:1.0
+docker run -d -p 5000:5000 --name my-app --network my-app-network my-app:2.0
+
+
+docker stop my-app counter
+docker rm my-app counter
+docker compose up -d
+docker compose down
+
+docker tag my-app:2.0 donrubayet/my-app:2.0
+docker push donrubayet/my-app:2.0

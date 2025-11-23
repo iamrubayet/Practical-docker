@@ -1,0 +1,18 @@
+version: '3.8'
+
+
+services:
+
+  my-app:
+    build: ./my-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./my-app:/app
+    networks:
+      - my-app-network
+
+  counter:
+    build: ./counter-service
+
+    
